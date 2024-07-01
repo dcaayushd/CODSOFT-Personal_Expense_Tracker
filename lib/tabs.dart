@@ -19,27 +19,28 @@ class _TabsSectionState extends State<TabsSection> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: const Text('Expenses'),
+        title: Text(
+          'Expenses ${_selectedIndex + 1}',
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        elevation: 0,
-        selectedItemColor: Colors.green,
-        unselectedItemColor: Colors.grey,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.money),
+            icon: Icon(Icons.payments),
             label: 'Expenses',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
-            label: 'Reports',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
             label: 'Add',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bar_chart),
+            label: 'Reports',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -48,7 +49,12 @@ class _TabsSectionState extends State<TabsSection> {
         ],
       ),
       body: const Center(
-        child: Text('Expense Tracker'),
+        child: Text(
+          'Expense Tracker',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
