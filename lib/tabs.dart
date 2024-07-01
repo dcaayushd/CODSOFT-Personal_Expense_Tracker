@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../screens/add_expenses.dart';
+import '../screens/expenses.dart';
+import '../screens/reports.dart';
+import '../screens/settings.dart';
 
 class TabsSection extends StatefulWidget {
   const TabsSection({super.key});
@@ -9,6 +13,14 @@ class TabsSection extends StatefulWidget {
 
 class _TabsSectionState extends State<TabsSection> {
   var _selectedIndex = 0;
+
+  static const List<Widget> _screens = [
+    Expenses(),
+    Add(),
+    Reports(),
+    Settings(),
+  ];
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -19,14 +31,16 @@ class _TabsSectionState extends State<TabsSection> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
         title: Text(
-          'Expenses ${_selectedIndex + 1}',
+          ' ${_screens[_selectedIndex]}',
           style: const TextStyle(
             color: Colors.white,
           ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.blueGrey,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const [
@@ -48,14 +62,7 @@ class _TabsSectionState extends State<TabsSection> {
           ),
         ],
       ),
-      body: const Center(
-        child: Text(
-          'Expense Tracker',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
+      body: _screens[_selectedIndex],
     );
   }
 }

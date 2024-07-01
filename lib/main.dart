@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expense_tracker/tabs.dart';
+import '../tabs.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,16 +14,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'personal Expense Tracker',
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black,
+        // scaffoldBackgroundColor: Colors.black,
         appBarTheme: const AppBarTheme(
           centerTitle: true,
-          backgroundColor: Colors.black,
+          // backgroundColor: Colors.black,
         ),
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          backgroundColor: Colors.black,
+          // backgroundColor: Colors.black,
           elevation: 0,
-          // selectedItemColor: Colors.green,
-          unselectedItemColor: Colors.grey,
+          selectedItemColor: Colors.greenAccent,
+          unselectedItemColor: Colors.white,
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: true,
           showUnselectedLabels: true,
