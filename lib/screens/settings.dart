@@ -27,7 +27,7 @@ class Settings extends StatelessWidget {
       transformAlignment: Alignment.center,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: const Color(0xFF1C1C1E),
+          // color: const Color(0xFF1C1C1E),
           borderRadius: BorderRadius.circular(16),
         ),
         child: CupertinoFormSection.insetGrouped(
