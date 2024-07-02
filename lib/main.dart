@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import '../tabs.dart';
 
 void main() {
@@ -10,33 +10,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const CupertinoApp(
       debugShowCheckedModeBanner: false,
-      title: 'personal Expense Tracker',
-      theme: ThemeData(
-        // scaffoldBackgroundColor: Colors.black,
-        appBarTheme: const AppBarTheme(
-          centerTitle: true,
-          // backgroundColor: Colors.black,
-        ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          // backgroundColor: Colors.black,
-          elevation: 0,
-          // selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.blueGrey,
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-        ),
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.black,
-        ).copyWith(
-          primary: Colors.blue,
-          secondary: Colors.black,
-        ),
+      title: 'Personal Expense Tracker',
+      theme: CupertinoThemeData(
+        primaryColor: Color.fromARGB(255, 41, 141, 255),
+        // brightness: Brightness.light,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: Color(0xFF0D0F14),
       ),
-      home: const TabsSection(),
+      home: TabsController(),
     );
   }
 }
