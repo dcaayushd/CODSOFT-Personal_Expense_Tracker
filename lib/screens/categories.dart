@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flex_color_picker/flex_color_picker.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -13,7 +13,7 @@ class _CategoriesState extends State<Categories> {
   Color pickerColor = const Color(0xff443a49);
   Color currentColor = const Color(0xff443a49);
 
-  TextEditingController textController = TextEditingController();
+  late TextEditingController textController;
 
   @override
   void dispose() {
@@ -78,7 +78,7 @@ class _CategoriesState extends State<Categories> {
                                       shape: BoxShape.circle,
                                     ),
                                   ),
-                                  Text('Category Name')
+                                  const Text('Category Name')
                                 ],
                               ),
                               helper: null,
@@ -99,14 +99,24 @@ class _CategoriesState extends State<Categories> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        showDialog(
+                        showCupertinoDialog(
                           context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Pick a Category color'),
+                          builder: (context) => CupertinoAlertDialog(
+                            title: const Text('Pick a category color'),
                             content: SingleChildScrollView(
                               child: ColorPicker(
-                                pickerColor: pickerColor,
+                                color: pickerColor,
                                 onColorChanged: changeColor,
+                                heading: const Text('Select color'),
+                                subheading: const Text('Select color shade'),
+                                wheelSubheading:
+                                    const Text('Selected color and its shades'),
+                                pickersEnabled: const <ColorPickerType, bool>{
+                                  ColorPickerType.primary: true,
+                                  ColorPickerType.accent: true,
+                                  ColorPickerType.custom: true,
+                                  ColorPickerType.wheel: true,
+                                },
                               ),
                             ),
                             actions: <Widget>[
@@ -129,8 +139,8 @@ class _CategoriesState extends State<Categories> {
                           shape: BoxShape.circle,
                           border: Border.all(
                             color: Colors.white,
-                            width: 4,
-                            strokeAlign: BorderSide.strokeAlignOutside,
+                            width: 2,
+                            // strokeAlign: BorderSide.strokeAlignOutside,
                           ),
                         ),
                       ),
@@ -144,8 +154,10 @@ class _CategoriesState extends State<Categories> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    const Text('B'),
+                    CupertinoButton(
+                      onPressed: () {},
+                      child: const Icon(CupertinoIcons.paperplane_fill),
+                    ),
                   ],
                 ),
               )
