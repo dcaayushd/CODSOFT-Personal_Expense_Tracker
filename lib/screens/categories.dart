@@ -16,6 +16,12 @@ class _CategoriesState extends State<Categories> {
   late TextEditingController textController;
 
   @override
+  void initState() {
+    super.initState();
+    textController = TextEditingController(text: '');
+  }
+
+  @override
   void dispose() {
     textController.dispose();
     super.dispose();
