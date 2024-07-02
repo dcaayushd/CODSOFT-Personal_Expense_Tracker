@@ -31,21 +31,21 @@ class _TabsSectionState extends State<TabsSection> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
+        // backgroundColor: Colors.blueGrey,
         title: Text(
           ' ${_screens[_selectedIndex]}',
           style: const TextStyle(
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.blueGrey,
+        // backgroundColor: Colors.blueGrey,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.payments),
+            icon: Icon(Icons.payment),
             label: 'Expenses',
           ),
           BottomNavigationBarItem(

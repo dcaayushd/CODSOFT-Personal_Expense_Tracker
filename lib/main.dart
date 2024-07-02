@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           // backgroundColor: Colors.black,
           elevation: 0,
-          selectedItemColor: Colors.greenAccent,
-          unselectedItemColor: Colors.white,
+          // selectedItemColor: Colors.blue,
+          unselectedItemColor: Colors.blueGrey,
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: true,
           showUnselectedLabels: true,
@@ -31,7 +31,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.black,
-        ).copyWith(primary: Colors.green, secondary: Colors.black),
+        ).copyWith(
+          primary: Colors.blue,
+          secondary: Colors.black,
+        ),
       ),
       home: const TabsSection(),
     );
