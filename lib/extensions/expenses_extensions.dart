@@ -1,6 +1,6 @@
 import 'package:personal_expense_tracker/extensions/date_extensions.dart';
-import '../Types/period.dart';
-import '../models/expense.dart';
+import 'package:personal_expense_tracker/models/expense.dart';
+import 'package:personal_expense_tracker/types/period.dart';
 
 extension ExpensesExtension on List<Expense> {
   List filterByPeriod(Period period, int periodIndex) {
