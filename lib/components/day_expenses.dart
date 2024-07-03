@@ -24,11 +24,13 @@ class DayExpenses extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(date.formattedDate,
-              style: const TextStyle(
-                color: CupertinoColors.inactiveGray,
-                fontWeight: FontWeight.w500,
-              )),
+          Text(
+            date.formattedDate,
+            style: const TextStyle(
+              color: CupertinoColors.inactiveGray,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           const Divider(
             thickness: 2,
             color: CupertinoColors.darkBackgroundGray,
