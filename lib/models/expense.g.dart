@@ -75,7 +75,7 @@ class Expense extends $Expense with RealmEntity, RealmObjectBase, RealmObject {
   static SchemaObject? _schema;
   static SchemaObject _initSchema() {
     RealmObjectBase.registerFactory(Expense._);
-    return  SchemaObject(ObjectType.realmObject, Expense, 'Expense', [
+    return SchemaObject(ObjectType.realmObject, Expense, 'Expense', [
       const SchemaProperty('id', RealmPropertyType.objectid, primaryKey: true),
       const SchemaProperty('amount', RealmPropertyType.double),
       const SchemaProperty('category', RealmPropertyType.object,

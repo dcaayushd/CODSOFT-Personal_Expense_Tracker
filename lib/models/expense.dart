@@ -1,10 +1,8 @@
-
-import 'package:personal_expense_tracker/models/category.dart';
+import 'package:personal_expense_tracker/types/recurrence.dart';
 import 'package:realm/realm.dart';
 
+import 'package:personal_expense_tracker/models/category.dart';
 import 'package:intl/intl.dart';
-
-import '../Types/recurrence.dart';
 
 part 'expense.g.dart';
 
