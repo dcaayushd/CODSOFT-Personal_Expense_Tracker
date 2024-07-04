@@ -1,115 +1,106 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:personal_expense_tracker/screens/categories.dart';
+import 'package:personal_expense_tracker/models/category.dart';
+import 'package:personal_expense_tracker/models/expense.dart';
+import 'package:personal_expense_tracker/realm.dart';
+import 'package:personal_expense_tracker/utils/destructive_prompt.dart';
+
+import 'categories.dart';
+import '../types/widgets.dart';
 
 class Item {
   final String label;
   final bool isDestructive;
 
-  const Item(
-    this.label,
-    this.isDestructive,
-  );
+  const Item(this.label, this.isDestructive);
 }
 
-const items = [Item('Categories', false), Item('Delete all data', true)];
+const items = [
+  Item('Categories', false),
+  Item('Delete all data', true),
+];
 
-class Settings extends StatelessWidget {
-  final String title = 'Settings';
-
-  const Settings({super.key});
+class Settings extends WidgetWithTitle {
+  const Settings({super.key}) : super(title: "Settings");
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 147,
-      width: double.infinity,
-      transformAlignment: Alignment.center,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          // color: const Color(0xFF1C1C1E),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: CupertinoFormSection.insetGrouped(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          children: [
-            ...List.generate(
-              items.length,
-              (index) {
-                return GestureDetector(
-                  onTap: () {
-                    switch (index) {
-                      case 0:
-                        Navigator.push(
-                          context,
-                          CupertinoPageRoute(
-                            builder: (context) => const Categories(),
-                          ),
-                        );
-                        break;
-                      case 1:
-                        _showAlertDialog(context);
-                        break;
-                    }
-                  },
-                  child: DecoratedBox(
-                    decoration: const BoxDecoration(
-                        // color: Color(0xFF1C1C1E),
-                        ),
-                    child: CupertinoFormRow(
-                      prefix: Text(
-                        items[index].label,
-                        style: TextStyle(
-                          color: items[index].isDestructive
-                              ? Colors.red
-                              : Colors.black,
-                        ),
-                      ),
-                      helper: null,
-                      padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
-                      child: items[index].isDestructive
-                          ? Container()
-                          : const Icon(
-                              Icons.arrow_right,
+    return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        backgroundColor: Color.fromARGB(0, 0, 0, 0),
+        middle: Text("Settings"),
+      ),
+      child: SafeArea(
+        left: true,
+        top: true,
+        right: true,
+        bottom: true,
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          transformAlignment: Alignment.center,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              color: const Color(0xFF0D0F14),
+              // color: const Color.fromARGB(255, 28, 28, 30),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: CupertinoFormSection.insetGrouped(
+              backgroundColor: const Color(0xFF0D0F14),
+              children: [
+                ...List.generate(
+                  items.length,
+                  (index) => GestureDetector(
+                    onTap: () {
+                      switch (index) {
+                        case 0:
+                          Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => const Categories(),
                             ),
+                          );
+                          break;
+                        case 1:
+                          showAlertDialog(
+                            context,
+                            () {
+                              realm.write(() {
+                                realm.deleteAll<Expense>();
+                                realm.deleteAll<Category>();
+                              });
+                            },
+                            "Are you sure?",
+                            "This action cannot be undone.",
+                            "Delete data",
+                          );
+                          break;
+                      }
+                    },
+                    child: DecoratedBox(
+                      decoration: const BoxDecoration(),
+                      child: CupertinoFormRow(
+                        prefix: Text(
+                          items[index].label,
+                          style: TextStyle(
+                            color: items[index].isDestructive
+                                ? const Color.fromARGB(255, 255, 69, 58)
+                                : const Color.fromARGB(255, 255, 255, 255),
+                          ),
+                        ),
+                        helper: null,
+                        padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+                        child: items[index].isDestructive
+                            ? Container()
+                            : const Icon(CupertinoIcons.chevron_right),
+                      ),
                     ),
                   ),
-                );
-              },
+                )
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
-  }
-
-  void _showAlertDialog(BuildContext context) {
-    showCupertinoModalPopup<void>(
-        context: context,
-        builder: (BuildContext context) => CupertinoAlertDialog(
-              title: const Text('Are you sure?'),
-              content: const Text('This action cannot be undone'),
-              actions: <CupertinoDialogAction>[
-                CupertinoDialogAction(
-                  isDefaultAction: true,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel'),
-                ),
-                CupertinoDialogAction(
-                  isDefaultAction: true,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    'Delete Data',
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              ],
-            ));
   }
 }
