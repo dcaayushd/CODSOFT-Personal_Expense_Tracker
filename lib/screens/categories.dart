@@ -54,7 +54,8 @@ class CategoriesState extends State<Categories> {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         leading: CupertinoNavigationBarBackButton(
-            onPressed: () => Navigator.pop(context)),
+          onPressed: () => Navigator.pop(context),
+        ),
         middle: const Text(
           "Categories",
           style: TextStyle(
@@ -96,7 +97,6 @@ class CategoriesState extends State<Categories> {
                                       confirm.complete(false);
                                     },
                                   );
-
                                   return confirm.future;
                                 },
                                 onDismissed: (_) {
@@ -196,22 +196,24 @@ class CategoriesState extends State<Categories> {
                         );
                       },
                       child: Container(
-                          width: 24,
-                          height: 24,
-                          margin: const EdgeInsets.only(right: 12),
-                          decoration: BoxDecoration(
-                            color: pickerColor,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                color: const Color.fromARGB(255, 255, 255, 255),
-                                width: 2),
-                          )),
+                        width: 24,
+                        height: 24,
+                        margin: const EdgeInsets.only(right: 12),
+                        decoration: BoxDecoration(
+                          color: pickerColor,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            width: 2,
+                          ),
+                        ),
+                      ),
                     ),
                     Expanded(
                       child: Container(
                         margin: const EdgeInsets.only(right: 12),
                         child: CupertinoTextField(
-                          placeholder: "Category name",
+                          placeholder: "Enter a category name",
                           controller: _textController,
                         ),
                       ),
