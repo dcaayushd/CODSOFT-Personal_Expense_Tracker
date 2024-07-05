@@ -1,19 +1,24 @@
-// ignore_for_file: library_private_types_in_public_api, depend_on_referenced_packages
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:collection/collection.dart';
-
-import 'package:personal_expense_tracker/components/expenses_list.dart';
-import 'package:personal_expense_tracker/extensions/number_extensions.dart';
-import 'package:personal_expense_tracker/extensions/expenses_extensions.dart';
-import 'package:personal_expense_tracker/constants.dart';
-import 'package:personal_expense_tracker/models/expense.dart';
-import 'package:personal_expense_tracker/realm.dart';
-import 'package:personal_expense_tracker/types/period.dart';
-import 'package:personal_expense_tracker/types/widgets.dart';
-import 'package:personal_expense_tracker/utils/picker_utils.dart';
 import 'package:realm/realm.dart';
+import 'package:collection/collection.dart' ;
+
+import '../components/expenses_list.dart';
+
+import '../extensions/number_extensions.dart';
+import '../extensions/expenses_extensions.dart';
+
+import '../models/expense.dart';
+
+import '../types/period.dart';
+import '../types/widgets.dart';
+
+import '../utils/picker_utils.dart';
+
+import '../constants.dart';
+
+import '../realm.dart';
 
 class Expenses extends WidgetWithTitle {
   const Expenses({super.key}) : super(title: "Expenses");
@@ -28,10 +33,10 @@ class ExpensesContent extends StatefulWidget {
   const ExpensesContent({super.key});
 
   @override
-  _ExpensesContent createState() => _ExpensesContent();
+  ExpensesContentState createState() => ExpensesContentState();
 }
 
-class _ExpensesContent extends State<ExpensesContent> {
+class ExpensesContentState extends State<ExpensesContent> {
   int _selectedPeriodIndex = 1;
   Period get _selectedPeriod => periods[_selectedPeriodIndex];
 
@@ -92,13 +97,14 @@ class _ExpensesContent extends State<ExpensesContent> {
                       squeeze: 1.2,
                       useMagnifier: false,
                       itemExtent: kItemExtent,
-                      // This is called when selected item is changed.
                       onSelectedItemChanged: (int selectedItem) {
-                        setState(() {
-                          _selectedPeriodIndex = selectedItem;
-                          _expenses = realmExpenses.toList().filterByPeriod(
-                              periods[_selectedPeriodIndex], 0)[0];
-                        });
+                        setState(
+                          () {
+                            _selectedPeriodIndex = selectedItem;
+                            _expenses = realmExpenses.toList().filterByPeriod(
+                                periods[_selectedPeriodIndex], 0)[0];
+                          },
+                        );
                       },
                       children: List<Widget>.generate(
                         periods.length,
@@ -112,7 +118,9 @@ class _ExpensesContent extends State<ExpensesContent> {
                       ),
                     ),
                   ),
-                  child: Text(getPeriodDisplayName(_selectedPeriod)),
+                  child: Text(
+                    getPeriodDisplayName(_selectedPeriod),
+                  ),
                 ),
               ],
             ),
