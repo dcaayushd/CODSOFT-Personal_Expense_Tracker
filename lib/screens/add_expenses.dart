@@ -68,20 +68,24 @@ class AddContentState extends State<AddContent> {
           recurrence: recurrences[_selectedRecurrenceIndex],
         )));
 
-    setState(() {
-      _amountController.clear();
-      _selectedRecurrenceIndex = 0;
-      _selectedDate = DateTime.now();
-      _noteController.clear();
-      _selectedCategoryIndex = 0;
-    });
+    setState(
+      () {
+        _amountController.clear();
+        _selectedRecurrenceIndex = 0;
+        _selectedDate = DateTime.now();
+        _noteController.clear();
+        _selectedCategoryIndex = 0;
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    _categoriesSub ??= realmCategories.changes.listen((event) {
-      categories = event.results.toList();
-    });
+    _categoriesSub ??= realmCategories.changes.listen(
+      (event) {
+        categories = event.results.toList();
+      },
+    );
 
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
@@ -124,8 +128,10 @@ class AddContentState extends State<AddContent> {
                             placeholder: "Amount",
                             controller: _amountController,
                             onChanged: (value) {
-                              setState(() => canSubmit =
-                                  categories.isNotEmpty && value.isNotEmpty);
+                              setState(
+                                () => canSubmit =
+                                    categories.isNotEmpty && value.isNotEmpty,
+                              );
                             },
                             keyboardType: const TextInputType.numberWithOptions(
                               decimal: true,
@@ -161,7 +167,6 @@ class AddContentState extends State<AddContent> {
                                 squeeze: 1.2,
                                 useMagnifier: false,
                                 itemExtent: kItemExtent,
-                                // This is called when selected item is changed.
                                 onSelectedItemChanged: (int selectedItem) {
                                   setState(() {
                                     _selectedRecurrenceIndex = selectedItem;
@@ -187,7 +192,8 @@ class AddContentState extends State<AddContent> {
                           prefix: const Text(
                             "Date",
                             style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255)),
+                              color: Color.fromARGB(255, 255, 255, 255),
+                            ),
                           ),
                           helper: null,
                           padding: const EdgeInsets.fromLTRB(16, 0, 8, 0),
@@ -198,14 +204,16 @@ class AddContentState extends State<AddContent> {
                                 initialDateTime: _selectedDate,
                                 mode: CupertinoDatePickerMode.dateAndTime,
                                 use24hFormat: true,
-                                // This is called when the user changes the time.
                                 onDateTimeChanged: (DateTime newTime) {
-                                  setState(() => _selectedDate = newTime);
+                                  setState(
+                                    () => _selectedDate = newTime,
+                                  );
                                 },
                               ),
                             ),
                             child: Text(
-                                '${_selectedDate.month}/${_selectedDate.day}/${_selectedDate.year} ${_selectedDate.hour}:${_selectedDate.minute}'),
+                              '${_selectedDate.month}/${_selectedDate.day}/${_selectedDate.year} ${_selectedDate.hour}:${_selectedDate.minute}',
+                            ),
                           ),
                         ),
                       ),
@@ -248,15 +256,18 @@ class AddContentState extends State<AddContent> {
                               context,
                               CupertinoPicker(
                                 scrollController: FixedExtentScrollController(
-                                    initialItem: _selectedCategoryIndex),
+                                  initialItem: _selectedCategoryIndex,
+                                ),
                                 magnification: 1,
                                 squeeze: 1.2,
                                 useMagnifier: false,
                                 itemExtent: kItemExtent,
                                 onSelectedItemChanged: (int selectedItem) {
-                                  setState(() {
-                                    _selectedCategoryIndex = selectedItem;
-                                  });
+                                  setState(
+                                    () {
+                                      _selectedCategoryIndex = selectedItem;
+                                    },
+                                  );
                                 },
                                 children: List<Widget>.generate(
                                   categories.length,
@@ -269,14 +280,15 @@ class AddContentState extends State<AddContent> {
                                             MainAxisAlignment.start,
                                         children: <Widget>[
                                           Container(
-                                              width: 12,
-                                              height: 12,
-                                              margin: const EdgeInsets.fromLTRB(
-                                                  0, 0, 8, 0),
-                                              decoration: BoxDecoration(
-                                                color: categories[index].color,
-                                                shape: BoxShape.circle,
-                                              )),
+                                            width: 12,
+                                            height: 12,
+                                            margin: const EdgeInsets.fromLTRB(
+                                                0, 0, 8, 0),
+                                            decoration: BoxDecoration(
+                                              color: categories[index].color,
+                                              shape: BoxShape.circle,
+                                            ),
+                                          ),
                                           Text(categories[index].name),
                                         ],
                                       ),
