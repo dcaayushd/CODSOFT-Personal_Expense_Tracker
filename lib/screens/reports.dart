@@ -1,25 +1,28 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
-import 'package:personal_expense_tracker/components/charts/monthly_chart.dart';
-import 'package:personal_expense_tracker/components/charts/weekly_chart.dart';
-import 'package:personal_expense_tracker/components/charts/yearly_chart.dart';
-import 'package:personal_expense_tracker/components/expenses_list.dart';
-
-import 'package:personal_expense_tracker/constants.dart';
-import 'package:personal_expense_tracker/extensions/date_extensions.dart';
-import 'package:personal_expense_tracker/extensions/expenses_extensions.dart';
-import 'package:personal_expense_tracker/extensions/number_extensions.dart';
-// import 'package:personal_expense_tracker/mock/mock_expenses.dart';
-import 'package:personal_expense_tracker/models/expense.dart';
-import 'package:personal_expense_tracker/realm.dart';
-import 'package:personal_expense_tracker/types/period.dart';
-import 'package:personal_expense_tracker/utils/picker_utils.dart';
 import 'package:realm/realm.dart';
 
+import '../components/charts/monthly_chart.dart';
+import '../components/charts/weekly_chart.dart';
+import '../components/charts/yearly_chart.dart';
+import '../components/expenses_list.dart';
+
+import '../extensions/date_extensions.dart';
+import '../extensions/expenses_extensions.dart';
+import '../extensions/number_extensions.dart';
+
+// import '../mock/mock_expenses.dart';
+import '../realm.dart';
+
+import '../models/expense.dart';
+
+import '../types/period.dart';
 import '../types/widgets.dart';
+
+import '../utils/picker_utils.dart';
+
+import '../constants.dart';
 
 class Reports extends WidgetWithTitle {
   const Reports({super.key}) : super(title: "Reports");
@@ -34,10 +37,10 @@ class ReportsContent extends StatefulWidget {
   const ReportsContent({super.key});
 
   @override
-  _ReportsContent createState() => _ReportsContent();
+  ReportsContentState createState() => ReportsContentState();
 }
 
-class _ReportsContent extends State<ReportsContent> {
+class ReportsContentState extends State<ReportsContent> {
   final PageController _controller = PageController(initialPage: 0);
   set _currentPage(int value) {
     setStateValues(value);
