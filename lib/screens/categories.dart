@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:personal_expense_tracker/models/category.dart';
-import 'package:personal_expense_tracker/realm.dart';
-import 'package:personal_expense_tracker/utils/destructive_prompt.dart';
+
+import '../models/category.dart';
+import '../realm.dart';
+import '../utils/destructive_prompt.dart';
 
 class Categories extends StatefulWidget {
   const Categories({super.key});
@@ -38,74 +39,88 @@ class CategoriesState extends State<Categories> {
 
   void createCategory() {
     var newCategory = realm.write<Category>(
-        () => realm.add(Category(_textController.text, pickerColor.value)));
-    setState(() => categories.add(newCategory));
+      () => realm.add(
+        Category(_textController.text, pickerColor.value),
+      ),
+    );
+    setState(
+      () => categories.add(newCategory),
+    );
     _textController.clear();
   }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        navigationBar: CupertinoNavigationBar(
-          leading: CupertinoNavigationBarBackButton(
-              onPressed: () => Navigator.pop(context)),
-          middle: const Text("Categories",
-              style: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
-          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      navigationBar: CupertinoNavigationBar(
+        leading: CupertinoNavigationBarBackButton(
+            onPressed: () => Navigator.pop(context)),
+        middle: const Text(
+          "Categories",
+          style: TextStyle(
+            color: Color.fromARGB(255, 255, 255, 255),
+          ),
         ),
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          transformAlignment: Alignment.center,
-          padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
-          color: const Color.fromARGB(255, 0, 0, 0),
-          child: Column(children: [
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+      ),
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        transformAlignment: Alignment.center,
+        padding: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+        color: const Color.fromARGB(255, 0, 0, 0),
+        child: Column(
+          children: [
             categories.isNotEmpty
                 ? Expanded(
-                    child: CupertinoFormSection.insetGrouped(children: [
-                      ...List.generate(
-                        categories.length,
-                        (index) => GestureDetector(
-                          child: DecoratedBox(
-                            decoration: const BoxDecoration(),
-                            child: Dismissible(
-                              key: Key(categories[index].name),
-                              confirmDismiss: (_) {
-                                var confirm = Completer<bool>();
-                                showAlertDialog(
-                                  context,
-                                  () {
-                                    confirm.complete(true);
-                                  },
-                                  "Are you sure?",
-                                  "This action cannot be undone.",
-                                  "Delete ${categories[index].name} category",
-                                  cancellationCallback: () {
-                                    confirm.complete(false);
-                                  },
-                                );
+                    child: CupertinoFormSection.insetGrouped(
+                      children: [
+                        ...List.generate(
+                          categories.length,
+                          (index) => GestureDetector(
+                            child: DecoratedBox(
+                              decoration: const BoxDecoration(),
+                              child: Dismissible(
+                                key: Key(categories[index].name),
+                                confirmDismiss: (_) {
+                                  var confirm = Completer<bool>();
+                                  showAlertDialog(
+                                    context,
+                                    () {
+                                      confirm.complete(true);
+                                    },
+                                    "Are you sure?",
+                                    "This action cannot be undone.",
+                                    "Delete ${categories[index].name} category",
+                                    cancellationCallback: () {
+                                      confirm.complete(false);
+                                    },
+                                  );
 
-                                return confirm.future;
-                              },
-                              onDismissed: (_) {
-                                setState(() {
-                                  realm.write(
-                                      () => realm.delete(categories[index]));
-                                  categories.removeAt(index);
-                                });
-                              },
-                              background: Container(
-                                color: CupertinoColors.destructiveRed,
-                                alignment: Alignment.centerRight,
-                                padding: const EdgeInsets.only(right: 16),
-                                child: const Icon(
-                                  CupertinoIcons.delete,
-                                  color: CupertinoColors.white,
+                                  return confirm.future;
+                                },
+                                onDismissed: (_) {
+                                  setState(
+                                    () {
+                                      realm.write(() =>
+                                          realm.delete(categories[index]));
+                                      categories.removeAt(index);
+                                    },
+                                  );
+                                },
+                                background: Container(
+                                  color: CupertinoColors.destructiveRed,
+                                  alignment: Alignment.centerRight,
+                                  padding: const EdgeInsets.only(right: 16),
+                                  child: const Icon(
+                                    CupertinoIcons.delete,
+                                    color: CupertinoColors.white,
+                                  ),
                                 ),
-                              ),
-                              child: CupertinoFormRow(
-                                  prefix: Row(children: [
-                                    Container(
+                                child: CupertinoFormRow(
+                                  prefix: Row(
+                                    children: [
+                                      Container(
                                         width: 12,
                                         height: 12,
                                         margin: const EdgeInsets.fromLTRB(
@@ -113,94 +128,105 @@ class CategoriesState extends State<Categories> {
                                         decoration: BoxDecoration(
                                           color: categories[index].color,
                                           shape: BoxShape.circle,
-                                        )),
-                                    Text(categories[index].name),
-                                  ]),
+                                        ),
+                                      ),
+                                      Text(categories[index].name),
+                                    ],
+                                  ),
                                   helper: null,
                                   padding:
                                       const EdgeInsets.fromLTRB(16, 14, 16, 14),
-                                  child: Container()),
+                                  child: Container(),
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ]),
+                      ],
+                    ),
                   )
                 : Expanded(
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
-                      child: const Text("No categories yet",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 255, 255, 255))),
+                      child: const Text(
+                        "No categories yet",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        ),
+                      ),
                     ),
                   ),
             SafeArea(
-                bottom: true,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          showCupertinoDialog(
-                            context: context,
-                            builder: (context) => CupertinoAlertDialog(
-                              title: const Text('Pick a category color'),
-                              content: SingleChildScrollView(
-                                child: ColorPicker(
-                                  color: pickerColor,
-                                  onColorChanged: changeColor,
-                                  heading: const Text('Select color'),
-                                  subheading: const Text('Select color shade'),
-                                  wheelSubheading: const Text(
-                                      'Selected color and its shades'),
-                                  pickersEnabled: const <ColorPickerType, bool>{
-                                    ColorPickerType.primary: true,
-                                    ColorPickerType.accent: true,
-                                    ColorPickerType.custom: true,
-                                    ColorPickerType.wheel: true,
-                                  },
-                                ),
+              bottom: true,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        showCupertinoDialog(
+                          context: context,
+                          builder: (context) => CupertinoAlertDialog(
+                            title: const Text('Pick a category color'),
+                            content: SingleChildScrollView(
+                              child: ColorPicker(
+                                color: pickerColor,
+                                onColorChanged: changeColor,
+                                heading: const Text('Select color'),
+                                subheading: const Text('Select color shade'),
+                                wheelSubheading:
+                                    const Text('Selected color and its shades'),
+                                pickersEnabled: const <ColorPickerType, bool>{
+                                  ColorPickerType.primary: true,
+                                  ColorPickerType.accent: true,
+                                  ColorPickerType.custom: true,
+                                  ColorPickerType.wheel: true,
+                                },
                               ),
-                              actions: <Widget>[
-                                CupertinoButton(
-                                  child: const Text('Got it'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                              ],
                             ),
-                          );
-                        },
-                        child: Container(
-                            width: 24,
-                            height: 24,
-                            margin: const EdgeInsets.only(right: 12),
-                            decoration: BoxDecoration(
-                              color: pickerColor,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                  color:
-                                      const Color.fromARGB(255, 255, 255, 255),
-                                  width: 2),
-                            )),
+                            actions: <Widget>[
+                              CupertinoButton(
+                                child: const Text('Got it'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      child: Container(
+                          width: 24,
+                          height: 24,
+                          margin: const EdgeInsets.only(right: 12),
+                          decoration: BoxDecoration(
+                            color: pickerColor,
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                color: const Color.fromARGB(255, 255, 255, 255),
+                                width: 2),
+                          )),
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 12),
+                        child: CupertinoTextField(
+                          placeholder: "Category name",
+                          controller: _textController,
+                        ),
                       ),
-                      Expanded(
-                          child: Container(
-                              margin: const EdgeInsets.only(right: 12),
-                              child: CupertinoTextField(
-                                placeholder: "Category name",
-                                controller: _textController,
-                              ))),
-                      CupertinoButton(
-                        onPressed: createCategory,
-                        child: const Icon(CupertinoIcons.paperplane_fill),
-                      )
-                    ],
-                  ),
-                ))
-          ]),
-        ));
+                    ),
+                    CupertinoButton(
+                      onPressed: createCategory,
+                      child: const Icon(CupertinoIcons.paperplane_fill),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
