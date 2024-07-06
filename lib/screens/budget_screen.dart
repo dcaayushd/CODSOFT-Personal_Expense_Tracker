@@ -47,22 +47,32 @@ class BudgetContentState extends State<BudgetContent> {
 
   double get _total => _expenses.map((expense) => expense.amount).sum;
 
-  @override
+  void _loadBudgets() {
+    _budgets = realm.all<Budget>();
+    if (_budgets.isEmpty) {
+      _initializeBudgets();
+    }
+  }
+
+  void _initializeBudgets() {
+    realm.write(() {
+      for (var period in Period.values) {
+        realm.add(Budget(period.toString(), 0));
+      }
+    });
+  }
+
+    @override
   void initState() {
     super.initState();
     _loadBudgets();
     _expenses = realmExpenses.toList().filterByPeriod(_selectedPeriod, 0)[0];
-  }
 
-  void _loadBudgets() {
-    _budgets = realm.all<Budget>();
-    if (_budgets.isEmpty) {
-      realm.write(() {
-        for (var period in Period.values) {
-          realm.add(Budget(period.toString(), 0));
-        }
-      });
-    }
+    realm.all<Budget>().changes.listen((changes) {
+      if (changes.results.isEmpty) {
+        _initializeBudgets();
+      }
+    });
   }
 
   double _getBudget(Period period) {
