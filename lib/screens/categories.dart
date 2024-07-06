@@ -182,6 +182,9 @@ class CategoriesState extends State<Categories> {
                                   ColorPickerType.custom: true,
                                   ColorPickerType.wheel: true,
                                 },
+                                pickerTypeTextStyle: const TextStyle(
+                                  color: Color.fromARGB(255, 255, 255, 255),
+                                ),
                               ),
                             ),
                             actions: <Widget>[
