@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'screens/expenses.dart';
-import 'screens/reports.dart';
-import 'screens/add_expenses.dart';
-import 'screens/settings.dart';
+import 'screens/budget_screen.dart';
+import '../screens/expenses.dart';
+import '../screens/reports.dart';
+import '../screens/add_expenses.dart';
+import '../screens/settings.dart';
 import './types/widgets.dart';
 
 class TabsController extends StatefulWidget {
@@ -16,6 +17,7 @@ class _TabsControllerState extends State<TabsController> {
   var _selectedIndex = 0;
 
   static const List<WidgetWithTitle> _pages = [
+    BudgetScreen(),
     Expenses(),
     Add(),
     Reports(),
@@ -37,6 +39,10 @@ class _TabsControllerState extends State<TabsController> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(CupertinoIcons.money_dollar_circle_fill),
+            label: 'Budget',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.creditcard),
             label: 'Expenses',
           ),
           BottomNavigationBarItem(
