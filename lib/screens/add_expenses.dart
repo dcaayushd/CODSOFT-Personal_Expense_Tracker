@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:personal_expense_tracker/constants.dart';
@@ -133,11 +134,16 @@ class AddContentState extends State<AddContent> {
                                     categories.isNotEmpty && value.isNotEmpty,
                               );
                             },
-                            keyboardType: const TextInputType.numberWithOptions(
-                              decimal: true,
-                            ),
+                            // keyboardType: const TextInputType.numberWithOptions(
+                            //   decimal: true,
+                            // ),
+                            keyboardType: TextInputType.number,
                             textAlign: TextAlign.end,
-                            textInputAction: TextInputAction.continueAction,
+                            // textInputAction: TextInputAction.continueAction,
+                            textInputAction: Platform.isIOS
+                                ? TextInputAction.continueAction
+                                : TextInputAction.next,
+
                             style: const TextStyle(
                               color: Color.fromARGB(255, 255, 255, 255),
                               backgroundColor: Color.fromARGB(0, 0, 0, 0),
@@ -232,7 +238,11 @@ class AddContentState extends State<AddContent> {
                             placeholder: "Note",
                             controller: _noteController,
                             textAlign: TextAlign.end,
-                            textInputAction: TextInputAction.continueAction,
+                            // textInputAction: TextInputAction.continueAction,
+                            textInputAction: Platform.isIOS
+                                ? TextInputAction.continueAction
+                                : TextInputAction.next,
+
                             style: const TextStyle(
                               color: Color.fromARGB(255, 255, 255, 255),
                               backgroundColor: Color.fromARGB(0, 0, 0, 0),
