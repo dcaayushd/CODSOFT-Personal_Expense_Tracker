@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:personal_expense_tracker/models/category.dart';
-import 'package:personal_expense_tracker/models/expense.dart';
-import 'package:personal_expense_tracker/realm.dart';
-import 'package:personal_expense_tracker/utils/destructive_prompt.dart';
 
-import 'categories.dart';
+import '../models/budget.dart';
+import '../models/category.dart';
+import '../models/expense.dart';
+import '../realm.dart';
+import '../screens/categories.dart';
 import '../types/widgets.dart';
+import '../utils/destructive_prompt.dart';
 
 class Item {
   final String label;
@@ -67,6 +68,7 @@ class Settings extends WidgetWithTitle {
                               realm.write(() {
                                 realm.deleteAll<Expense>();
                                 realm.deleteAll<Category>();
+                                realm.deleteAll<Budget>();
                               });
                             },
                             "Are you sure?",
