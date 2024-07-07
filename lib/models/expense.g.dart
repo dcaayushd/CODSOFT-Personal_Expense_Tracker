@@ -61,7 +61,6 @@ class Expense extends $Expense with RealmEntity, RealmObjectBase, RealmObject {
   @override
   String? get recurrence =>
       RealmObjectBase.get<String>(this, 'recurrence') as String?;
-  @override
   set recurrence(String? value) => throw RealmUnsupportedSetError();
 
   @override
