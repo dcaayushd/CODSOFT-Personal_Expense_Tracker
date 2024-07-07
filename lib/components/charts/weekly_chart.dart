@@ -1,9 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'package:personal_expense_tracker/extensions/expenses_extensions.dart';
-import 'package:personal_expense_tracker/models/expense.dart';
-import 'package:personal_expense_tracker/utils/chart_utils.dart';
+import '../../extensions/expenses_extensions.dart';
+import '../../models/expense.dart';
+import '../../utils/chart_utils.dart';
 
 class WeeklyChart extends StatelessWidget {
   final Map<String, List<Expense>> expenses;
