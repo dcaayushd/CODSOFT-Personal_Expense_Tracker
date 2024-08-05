@@ -15,6 +15,10 @@ This is a personal expense manager built with Flutter to help you track your inc
 - Visualized Reports: Gain valuable insights into your finances with clear charts and graphs.
 - Detailed Expense List: Stay on top of your spending by reviewing all logged expenses.
 
+## Screenshots
+
+![App SS](screenshots/app_ss.jpg)
+
 ## Dependencies
 
 The following dependencies are used in this personal expense manager:
