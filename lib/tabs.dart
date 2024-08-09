@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'screens/budget_screen.dart';
+import '../screens/budget_screen.dart';
 import '../screens/expenses.dart';
 import '../screens/reports.dart';
 import '../screens/add_expenses.dart';

@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_expense_tracker/components/expense_row.dart';
+import '../components/expense_row.dart';
 
-import 'package:personal_expense_tracker/extensions/date_extensions.dart';
-import 'package:personal_expense_tracker/extensions/expenses_extensions.dart';
-import 'package:personal_expense_tracker/extensions/number_extensions.dart';
-import 'package:personal_expense_tracker/models/expense.dart';
+import '../extensions/date_extensions.dart';
+import '../extensions/expenses_extensions.dart';
+import '../extensions/number_extensions.dart';
+import '../models/expense.dart';
 
 class DayExpenses extends StatelessWidget {
   final DateTime date;

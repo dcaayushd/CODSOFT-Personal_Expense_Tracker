@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:realm/realm.dart';
 
-import 'package:personal_expense_tracker/models/category.dart';
-import 'package:personal_expense_tracker/models/expense.dart';
-import 'package:personal_expense_tracker/types/recurrence.dart';
+import '../models/category.dart';
+import '../models/expense.dart';
+import '../types/recurrence.dart';
 
 var now = DateTime.now();
 var yesterday = now.subtract(const Duration(days: 1));

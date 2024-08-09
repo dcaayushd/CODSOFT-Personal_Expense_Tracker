@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:personal_expense_tracker/components/day_expenses.dart';
-import 'package:personal_expense_tracker/extensions/date_extensions.dart';
-import 'package:personal_expense_tracker/models/expense.dart';
+import '../components/day_expenses.dart';
+import '../extensions/date_extensions.dart';
+import '../models/expense.dart';
 
 class ExpensesList extends StatelessWidget {
   final List<Expense> expenses;

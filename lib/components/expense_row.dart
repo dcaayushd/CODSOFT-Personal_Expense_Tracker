@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:personal_expense_tracker/components/category_badge.dart';
-import 'package:personal_expense_tracker/extensions/date_extensions.dart';
-import 'package:personal_expense_tracker/extensions/number_extensions.dart';
-import 'package:personal_expense_tracker/models/expense.dart';
+import '../components/category_badge.dart';
+import '../extensions/date_extensions.dart';
+import '../extensions/number_extensions.dart';
+import '../models/expense.dart';
 
 class ExpenseRow extends StatelessWidget {
   final Expense expense;

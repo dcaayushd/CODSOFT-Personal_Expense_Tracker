@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
-import 'package:personal_expense_tracker/models/category.dart';
+import '../models/category.dart';
 
 class CategoryBadge extends StatelessWidget {
   final Category? category;
